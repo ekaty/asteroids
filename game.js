@@ -674,7 +674,9 @@ Asteroid = function () {
     this.scale /= 3;
     if (this.scale > 0.5) {
       // break into fragments
-      for (var i = 0; i < 3; i++) {
+      // number of fragments
+      var fragment_ct = 3;
+      for (var i = 0; i < fragment_ct; i++) {
         var roid = $.extend(true, {}, this);
         roid.vel.x = Math.random() * 6 - 3;
         roid.vel.y = Math.random() * 6 - 3;
