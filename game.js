@@ -16,6 +16,14 @@ KEY_CODES = {
   80: 'p'
 }
 
+GAME_LIVES = 3;
+FRAGMENTS_COUNT = 5;
+
+SPRITE_COLOR='black';
+SHIP_COLOR = 'navy';
+ASTEROID_COLOR = 'lightgrey';
+
+
 KEY_STATUS = { keyDown:false };
 for (code in KEY_CODES) {
   KEY_STATUS[KEY_CODES[code]] = false;
@@ -36,6 +44,8 @@ $(window).keydown(function (e) {
 });
 
 GRID_SIZE = 60;
+
+
 
 Matrix = function (rows, columns) {
   var i, j;
@@ -94,7 +104,7 @@ Sprite = function () {
 
   this.children = {};
 
-  this.color    = 'black';
+  this.color    = SPRITE_COLOR;
   this.solid    = false;
   this.visible  = false;
   this.reap     = false;
@@ -379,7 +389,7 @@ Ship = function () {
               0, -11,
               6,   7]);
 
-  this.color = 'navy';
+  this.color = SHIP_COLOR;
   this.solid = true;
 
   this.children.exhaust = new Sprite();
@@ -390,7 +400,7 @@ Ship = function () {
                                0, 11,
                                3,  6]);
 
-  this.delayBeforeBullet = 0;
+  this.delayBeforeBullet = 0; 
 
   this.postMove = this.wrapPostMove;
 
@@ -660,14 +670,14 @@ Asteroid = function () {
               -4, -10,
               -4,  -5]);
 
-  this.color = 'lightgray';
+  this.color = ASTEROID_COLOR; 
   this.solid = true;
   this.visible = true;
   this.scale = 6;
   this.postMove = this.wrapPostMove;
 
   this.collidesWith = ["ship", "bullet", "bigalien", "alienbullet"];
-  this.ct_of_fragments = 3;
+  this.ct_of_fragments = FRAGMENTS_COUNT;
 
   this.breakIntoFragments = function () { 
     for (var i = 0; i < this.ct_of_fragments; i++) {
@@ -955,7 +965,7 @@ Game = {
       }
 
       Game.score = 0;
-      Game.lives = 2;
+      Game.lives = GAME_LIVES; 
       Game.totalAsteroids = 2;
       Game.spawnAsteroids();
 
